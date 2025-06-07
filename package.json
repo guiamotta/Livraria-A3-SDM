@@ -1,0 +1,17 @@
+{
+  "name": "trabalho-final-sistema-distribuido",
+  "description": "Api de uma livraria",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "knex": "^3.1.0",
+    "restify": "^11.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}
