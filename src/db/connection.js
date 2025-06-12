@@ -1,4 +1,4 @@
-const { default: knex } = require("knex");
+const { default: knex } = require("knex")
 
 const init = require("./initDB")
 
@@ -11,4 +11,4 @@ const db = knex(
     }
 )
 
-exports.db = db;
+exports.db = db

@@ -1,5 +1,5 @@
 const connection = require("../db/connection")
-const db = connection.db;
+const db = connection.db
 
 const Usuario = {
   //método para retornar todos os usuarios

@@ -1,5 +1,5 @@
 const connection = require("../db/connection")
-const db = connection.db;
+const db = connection.db
 
 const Emprestimo = {
     //Método para retornar todos os emprestimos.
@@ -20,4 +20,4 @@ const Emprestimo = {
     patchRentListing: (user_id, book_id, data) => db("livro_emprestado").where("id_usuario", user_id).andWhere("id_livro", book_id).update(data)
 }
 
-module.exports = Emprestimo;
+module.exports = Emprestimo

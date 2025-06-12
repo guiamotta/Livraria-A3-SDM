@@ -9,22 +9,22 @@ function cachedById(id) {
 
   for(let i = 0; i < by_id_cache._count; ++i)
   {
-    let curr = by_id_cache.Peek(i);
+    let curr = by_id_cache.Peek(i)
     if(curr.id === id)
-      return curr;
+      return curr
   }
 
-  return null;
+  return null
 }
 
 function decacheById(id) {
   for(let i = 0; i < by_id_cache._count; ++i)
   {
-    let curr = by_id_cache.Peek(i);
+    let curr = by_id_cache.Peek(i)
     if(curr.id === id)
     {
-      by_id_cache.Remove(i);
-      return;
+      by_id_cache.Remove(i)
+      return
     }
   }
 }
@@ -44,12 +44,12 @@ async function getAll(req, res){
 async function getById(req, res){
   const id = req.params.idUser
   try{
-    let usuario = cachedById(id);
-    let do_cache = false;
+    let usuario = cachedById(id)
+    let do_cache = false
     if (usuario === null)
     {
-      usuario = await Usuario.getById(id);
-      do_cache = true;
+      usuario = await Usuario.getById(id)
+      do_cache = true
     }
 
       if (!usuario){
@@ -57,7 +57,7 @@ async function getById(req, res){
       }
       else if(do_cache)
       {
-        by_id_cache.Push(usuario);
+        by_id_cache.Push(usuario)
       }
       res.send(usuarioView.viewUsuario(usuario))
   }
@@ -87,7 +87,7 @@ async function update(req, res){
       res.send(404, {message: `O usuário com ID ${id} não foi encontrado`})
     }
     else {
-      decacheById(id);
+      decacheById(id)
     }
 
     res.send(200, {success: true})
@@ -106,7 +106,7 @@ async function remove(req, res){
       res.send(404, {message: `O usuário com ID ${id} não foi encontrado`})
     }
     else {
-      decacheById(id);
+      decacheById(id)
     }
 
     res.send(200, {success: true})
@@ -125,7 +125,7 @@ async function patch(req, res){
       return res.send(404, {message: `O usuário com ID ${id} não foi encontrado`})
     }
     else {
-      decacheById(id);
+      decacheById(id)
     }
 
     const dadosAtualizados = {...usuarioAtual, ...req.body}

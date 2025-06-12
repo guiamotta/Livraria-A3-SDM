@@ -1,32 +1,32 @@
-const { default: knex } = require("knex");
-const sqlite3 = require("sqlite3").verbose();
-const fs = require("fs");
-const path = require("path");
+const { default: knex } = require("knex")
+const sqlite3 = require("sqlite3").verbose()
+const fs = require("fs")
+const path = require("path")
 
-const dbPath = path.join(__dirname, "database.db");
+const dbPath = path.join(__dirname, "database.db")
 
 if (fs.existsSync(dbPath)) {
-    console.log("O arquivo database.db não foi criado pois ele já existe!");
+    console.log("O arquivo database.db não foi criado pois ele já existe!")
 }
 else{
-    fs.writeFileSync(dbPath, "");
+    fs.writeFileSync(dbPath, "")
 
     const db_initializer = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, async (err) => {
-        if (err) return console.error(err.message);
+        if (err) return console.error(err.message)
 
-        console.log("Conexão bem sucedida");
+        console.log("Conexão bem sucedida")
 
-        await init_all();
+        await init_all()
 
         db_initializer.close((err) => {
             if (err) {
-                console.warn("Erro ao encerrar o inicializador");
-                console.log(err);
-                return;
+                console.warn("Erro ao encerrar o inicializador")
+                console.log(err)
+                return
             }
 
-            console.log("O inicializador foi encerrado com sucesso");
-        });
+            console.log("O inicializador foi encerrado com sucesso")
+        })
 
         // Testando knex
         const db = knex({
@@ -35,26 +35,26 @@ else{
                 filename: dbPath
             },
             useNullAsDefault: true
-        });
+        })
 
         db.select('tbl_name').from('sqlite_master').where({ type: 'table' }).then(
             (values) => {
-                console.log("knex funcionando");
+                console.log("knex funcionando")
                 console.log(values);
                 db.destroy();
             }).catch((err) => {
-                console.log("knex error");
-                console.log(err);
-                db.destroy();
-            });
-    });
+                console.log("knex error")
+                console.log(err)
+                db.destroy()
+            })
+    })
 
     function init_all() {
         return Promise.all([
             init_users(),
             init_books(),
             init_rent()
-        ]);
+        ])
     }
 
     function init_users() {
@@ -69,15 +69,15 @@ else{
                 )`,
                 (err) => {
                     if (err) {
-                        console.log("Erro ao criar tabela usuario");
+                        console.log("Erro ao criar tabela usuario")
                         console.log(err);
                     } else {
-                        console.log("Tabela usuario criada");
+                        console.log("Tabela usuario criada")
                     }
                     resolve();
                 }
-            );
-        });
+            )
+        })
     }
 
     function init_books() {
@@ -90,15 +90,15 @@ else{
                 )`,
                 (err) => {
                     if (err) {
-                        console.log("Erro ao criar tabela livro");
+                        console.log("Erro ao criar tabela livro")
                         console.log(err);
                     } else {
-                        console.log("Tabela livro criada");
+                        console.log("Tabela livro criada")
                     }
-                    resolve();
+                    resolve()
                 }
-            );
-        });
+            )
+        })
     }
 
     function init_rent() {
@@ -112,14 +112,14 @@ else{
                 )`,
                 (err) => {
                     if (err) {
-                        console.log("Erro ao criar tabela livro_emprestado");
+                        console.log("Erro ao criar tabela livro_emprestado")
                         console.log(err);
                     } else {
-                        console.log("Tabela livro_emprestado criada");
+                        console.log("Tabela livro_emprestado criada")
                     }
-                    resolve();
+                    resolve()
                 }
-            );
-        });
+            )
+        })
     }
 }

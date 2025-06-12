@@ -5,7 +5,7 @@ const emprestimoController = require("../controllers/emprestimoController")
 //define os endpoints
 function registerRoutes(server) {
   server.get("/", (req, res, next) => {
-    res.send({resposta: "Sejam bem-vindos à Livraria"});
+    res.send({resposta: "Sejam bem-vindos à Livraria"})
     next();
   })
 
@@ -15,6 +15,7 @@ function registerRoutes(server) {
   server.post("/usuarios", usuarioController.create)
   server.put("/usuarios/:idUser", usuarioController.update)
   server.del("/usuarios/:idUser", usuarioController.remove)
+  server.patch("/usuarios/:idUser", usuarioController.patch)
 
   //endpoints livro
   server.get("/livros", livroController.getAll)
@@ -22,16 +23,17 @@ function registerRoutes(server) {
   server.post("/livros", livroController.create)
   server.put("/livros/:idBook", livroController.update)
   server.del("/livros/:idBook", livroController.remove)
+  server.patch("/livros/:idBook", livroController.patch)
 
   //endpoints emprestimo
-  server.get("/emprestimos", emprestimoController.getAll);
-  server.get("/emprestimos/usuarios/:idUser", emprestimoController.getByUserId);
-  server.get("/emprestimos/livros/:idBook", emprestimoController.getByBookId);
-  server.get("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.getUserBookRent);
-  server.post("/emprestimos", emprestimoController.create);
-  server.put("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.update);
-  server.patch("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.patch);
-  server.del("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.remove);
+  server.get("/emprestimos", emprestimoController.getAll)
+  server.get("/emprestimos/usuarios/:idUser", emprestimoController.getByUserId)
+  server.get("/emprestimos/livros/:idBook", emprestimoController.getByBookId)
+  server.get("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.getUserBookRent)
+  server.post("/emprestimos", emprestimoController.create)
+  server.put("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.update)
+  server.del("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.remove)
+  server.patch("/emprestimos/usuarios/:idUser/livros/:idBook", emprestimoController.patch)
 
 }
 

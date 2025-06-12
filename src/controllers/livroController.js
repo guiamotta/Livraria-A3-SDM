@@ -8,9 +8,9 @@ let by_id_cache = new Cache(20);
 function cachedById(id) {
   for(let i = 0; i < by_id_cache._count; ++i)
   {
-    let curr = by_id_cache.Peek(i);
+    let curr = by_id_cache.Peek(i)
     if(curr.id === id)
-      return curr;
+      return curr
   }
 
   return null;
@@ -19,11 +19,11 @@ function cachedById(id) {
 function decacheById(id) {
   for(let i = 0; i < by_id_cache._count; ++i)
   {
-    let curr = by_id_cache.Peek(i);
+    let curr = by_id_cache.Peek(i)
     if(curr.id === id)
     {
-      by_id_cache.Remove(i);
-      return;
+      by_id_cache.Remove(i)
+      return
     }
   }
 }
@@ -43,22 +43,23 @@ async function getAll(req, res){
 async function getById(req, res){
   const id = req.params.idBook
   try{
-      let livro = cachedById(id);
-      let do_cache = false;
+      let livro = cachedById(id)
+      let do_cache = false
       if(livro === null) {
         livro = await Livro.getById(id);
-        do_cache = true;
+        do_cache = true
       }
 
       if (!livro){
         res.send(404, {message: `O livro com ID ${id} não foi encontrado`})
       }
       else if (do_cache) {
-        by_id_cache.Push(livro);
+        by_id_cache.Push(livro)
       }
       res.send(livroView.viewLivro(livro))
   }
   catch (err){
+    console.log(err)
     res.send(new errors.InternalServerError(`Erro ao buscar livro com ID ${id}`))
   }
 }
@@ -84,7 +85,7 @@ async function update(req, res){
       res.send(404, {message: `O livro com ID ${id} não foi encontrado`})
     }
     else {
-      decacheById(id);
+      decacheById(id)
     }
 
     res.send(200, {success: true})

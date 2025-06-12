@@ -1,9 +1,9 @@
-const Livro = require("../models/livroModel");
-const Usuario = require("../models/usuarioModel");
+const Livro = require("../models/livroModel")
+const Usuario = require("../models/usuarioModel")
 
 async function viewEmprestimo(emprestimo) {
-  const usuario = await Usuario.getById(emprestimo.id_usuario);
-  const livro = await Livro.getById(emprestimo.id_livro);
+  const usuario = await Usuario.getById(emprestimo.id_usuario)
+  const livro = await Livro.getById(emprestimo.id_livro)
 
   return {
     id_usuario: emprestimo.id_usuario,
@@ -19,18 +19,18 @@ async function viewEmprestimo(emprestimo) {
     } : null,
     data_emprestimo: emprestimo.data_emprestimo,
     data_entrega: emprestimo.data_entrega,
-  };
+  }
 }
 
 async function viewAllEmprestimos(emprestimos) {
-  const results = [];
+  const results = []
   for (const emprestimo of emprestimos) {
-    results.push(await viewEmprestimo(emprestimo));
+    results.push(await viewEmprestimo(emprestimo))
   }
-  return results;
+  return results
 }
 
 module.exports = {
   viewEmprestimo,
   viewAllEmprestimos
-};
+}
