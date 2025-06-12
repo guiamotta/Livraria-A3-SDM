@@ -86,7 +86,7 @@ Routes dedicado à definição dos endpoints ./routes/routes.js.**
 
 ## 📁 Outros Componentes
 
-### 📄 server.js
+### 📄 src/server.js
 - Cria e inicia o servidor Restify.
 
 **Execute com o comando:** 
