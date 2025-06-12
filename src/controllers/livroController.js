@@ -3,7 +3,7 @@ const errors = require("restify-errors")
 const livroView = require("../views/livroView")
 const Cache = require("../utils/cacheUtils").Cache;
 
-let by_id_cache = new Cache();
+let by_id_cache = new Cache(20);
 
 function cachedById(id) {
   for(let i = 0; i < by_id_cache._count; ++i)
