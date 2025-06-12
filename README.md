@@ -94,13 +94,13 @@ Routes dedicado à definição dos endpoints ./routes/routes.js.**
 node server.js
 ```
 
-### 🔌 db/connection.js
+### 🔌 src/db/connection.js
 - Inicializa e realiza a conexão com o banco de dados SQLite3.
 
-### 🌐 routes/routes.js
+### 🌐 src/routes/routes.js
 - Define os endpoints da API e encaminha as requisições para os respectivos controladores.
 
-### 📚 utils/cacheUtils.js
+### 📚 src/utils/cacheUtils.js
 - Implementação de cache que é utilizada em livros e usuários.
 
 ### 🗃️ Banco de Dados
