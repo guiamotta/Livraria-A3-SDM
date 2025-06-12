@@ -100,6 +100,9 @@ node server.js
 ### 🌐 routes/routes.js
 - Define os endpoints da API e encaminha as requisições para os respectivos controladores.
 
+### 📚 utils/cacheUtils.js
+- Implementação de cache que é utilizada em livros e usuários.
+
 ### 🗃️ Banco de Dados
 - A API conecta-se ao seguinte banco SQLite3:
 
