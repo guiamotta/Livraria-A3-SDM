@@ -6,7 +6,7 @@ class Cache {
     }
 
     Push(obj) {
-        if(this._count != size)
+        if(this._count != _size)
         {
             this._memory[this._count] = obj;
             ++this._count;

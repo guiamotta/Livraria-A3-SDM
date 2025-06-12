@@ -6,6 +6,7 @@ const Cache = require("../utils/cacheUtils").Cache;
 let by_id_cache = new Cache(20);
 
 function cachedById(id) {
+
   for(let i = 0; i < by_id_cache._count; ++i)
   {
     let curr = by_id_cache.Peek(i);
@@ -45,7 +46,7 @@ async function getById(req, res){
   try{
     let usuario = cachedById(id);
     let do_cache = false;
-    if (usuario == null)
+    if (usuario === null)
     {
       usuario = await Usuario.getById(id);
       do_cache = true;
