@@ -3,7 +3,7 @@ function viewUsuario(usuario) {
   return {
     id: usuario.id,
     nome: usuario.nome,
-    email: usuario.preco,
+    email: usuario.email,
     cpf: usuario.cpf,
     senha: usuario.senha
   }
