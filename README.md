@@ -20,8 +20,9 @@ Model para serem alterados de forma apropriada conforme o usuário
 solicitou.
 
 **Para além do Model, View e Controller, o código também possui um componente
-DB dedicado à conexão ao banco de dados ./db/connection.js e outro chamado
-Routes dedicado à definição dos endpoints ./routes/routes.js.**
+DB dedicado à conexão ao banco de dados src/db/connection.js, um dedicado à 
+implementação do sistema de cache src/utils/cacheUtils.js e outro chamado
+Routes dedicado à definição dos endpoints src/routes/routes.js.**
 
 -----
 
@@ -86,7 +87,7 @@ Routes dedicado à definição dos endpoints ./routes/routes.js.**
 
 ## 📁 Outros Componentes
 
-### 📄 server.js
+### 📄 src/server.js
 - Cria e inicia o servidor Restify.
 
 **Execute com o comando:** 
@@ -94,11 +95,14 @@ Routes dedicado à definição dos endpoints ./routes/routes.js.**
 node server.js
 ```
 
-### 🔌 db/connection.js
+### 🔌 src/db/connection.js
 - Inicializa e realiza a conexão com o banco de dados SQLite3.
 
-### 🌐 routes/routes.js
+### 🌐 src/routes/routes.js
 - Define os endpoints da API e encaminha as requisições para os respectivos controladores.
+
+### 📚 src/utils/cacheUtils.js
+- Implementação de cache que é utilizada em livros e usuários.
 
 ### 🗃️ Banco de Dados
 - A API conecta-se ao seguinte banco SQLite3:
