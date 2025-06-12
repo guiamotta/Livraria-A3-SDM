@@ -1,6 +1,7 @@
 const Usuario = require("../models/usuarioModel")
 const errors = require("restify-errors")
 const usuarioView = require("../views/usuarioView")
+const Cache = require("../utils/cacheUtils").Cache;
 
 let by_id_cache = new Cache(20);
 
