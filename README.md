@@ -20,8 +20,9 @@ Model para serem alterados de forma apropriada conforme o usuário
 solicitou.
 
 **Para além do Model, View e Controller, o código também possui um componente
-DB dedicado à conexão ao banco de dados ./db/connection.js e outro chamado
-Routes dedicado à definição dos endpoints ./routes/routes.js.**
+DB dedicado à conexão ao banco de dados src/db/connection.js, um dedicado à 
+implementação do sistema de cache src/utils/cacheUtils.js e outro chamado
+Routes dedicado à definição dos endpoints src/routes/routes.js.**
 
 -----
 
