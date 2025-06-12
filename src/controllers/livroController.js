@@ -1,6 +1,32 @@
 const Livro = require("../models/livroModel")
 const errors = require("restify-errors")
 const livroView = require("../views/livroView")
+const Cache = require("../utils/cacheUtils").Cache;
+
+let by_id_cache = new Cache();
+
+function cachedById(id) {
+  for(let i = 0; i < by_id_cache._count; ++i)
+  {
+    let curr = by_id_cache.Peek(i);
+    if(curr.id === id)
+      return curr;
+  }
+
+  return null;
+}
+
+function decacheById(id) {
+  for(let i = 0; i < by_id_cache._count; ++i)
+  {
+    let curr = by_id_cache.Peek(i);
+    if(curr.id === id)
+    {
+      by_id_cache.Remove(i);
+      return;
+    }
+  }
+}
 
 //função que retorna todos os livros
 async function getAll(req, res){
@@ -17,9 +43,18 @@ async function getAll(req, res){
 async function getById(req, res){
   const id = req.params.idBook
   try{
-    const livro = await Livro.getById(id)
+      let livro = cachedById(id);
+      let do_cache = false;
+      if(livro === null) {
+        livro = await Livro.getById(id);
+        do_cache = true;
+      }
+
       if (!livro){
         res.send(404, {message: `O livro com ID ${id} não foi encontrado`})
+      }
+      else if (do_cache) {
+        by_id_cache.Push(livro);
       }
       res.send(livroView.viewLivro(livro))
   }
@@ -43,11 +78,15 @@ async function create(req, res){
 //função que atualiza os dados de um usuário baseado nos dados fornecidos
 async function update(req, res){
   const id = req.params.idBook
-  try{
+  try {
     const livroDeleted = await Livro.update(id, req.body)
     if (!livroDeleted){
       res.send(404, {message: `O livro com ID ${id} não foi encontrado`})
     }
+    else {
+      decacheById(id);
+    }
+
     res.send(200, {success: true})
   }
   catch (err){
@@ -63,6 +102,9 @@ async function remove(req, res){
     if (!livroDeleted){
       res.send(404, {message: `O livro com ID ${id} não foi encontrado`})
     }
+    else {
+      decacheById(id);
+    }
     res.send(200, {success: true})
   }
   catch (err){
@@ -77,6 +119,9 @@ async function patch(req, res){
     const livroAtual = await Livro.getById(id)
     if (!livroAtual){
       return res.send(404, {message: `O livro com ID ${id} não foi encontrado`})
+    }
+    else {
+      decacheById(id);
     }
 
     const dadosAtualizados = {...livroAtual, ...req.body}
